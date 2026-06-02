@@ -1,6 +1,37 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
-  <rect width="512" height="512" fill="#1A1A1A" rx="64"/>
-  <rect x="32" y="32" width="448" height="448" fill="none" stroke="#29ABE2" stroke-width="2" stroke-dasharray="8 8" rx="48" opacity="0.4"/>
-  <text x="256" y="248" font-family="'Orbitron', sans-serif" font-weight="700" font-size="48" fill="#29ABE2" text-anchor="middle" letter-spacing="4">LOGO</text>
-  <text x="256" y="296" font-family="'Montserrat', sans-serif" font-weight="400" font-size="18" fill="#808285" text-anchor="middle" letter-spacing="2">PLACEHOLDER</text>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" width="180" height="180">
+  <defs>
+    <radialGradient id="core" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#29ABE2" stop-opacity="0.55"/>
+      <stop offset="45%" stop-color="#1B6A94" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#0A0A0A" stop-opacity="1"/>
+    </radialGradient>
+    <linearGradient id="tileFrame" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3FBEEC" stop-opacity="0.85"/>
+      <stop offset="50%" stop-color="#29ABE2" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#0A0A0A" stop-opacity="0.2"/>
+    </linearGradient>
+    <linearGradient id="topShine" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="textGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feFlood flood-color="#29ABE2" flood-opacity="0.9"/>
+      <feComposite in2="blur" operator="in" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect x="2" y="2" width="176" height="176" rx="28" ry="28" fill="#0A0A0A"/>
+  <rect x="2" y="2" width="176" height="176" rx="28" ry="28" fill="url(#core)"/>
+  <path d="M 8 28 Q 8 4 32 4 L 148 4 Q 172 4 172 28 L 172 70 Q 90 96 8 70 Z" fill="url(#topShine)" opacity="0.7"/>
+  <rect x="2" y="2" width="176" height="176" rx="28" ry="28" fill="none" stroke="url(#tileFrame)" stroke-width="2"/>
+  <rect x="12" y="12" width="156" height="156" rx="20" ry="20" fill="none" stroke="#29ABE2" stroke-opacity="0.25" stroke-width="1"/>
+  <g filter="url(#textGlow)">
+    <text x="90" y="112" font-family="'Orbitron','Segoe UI','Helvetica Neue',sans-serif" font-weight="700" font-size="74" fill="#FFFFFF" text-anchor="middle" letter-spacing="4">BS</text>
+  </g>
+  <rect x="54" y="156" width="72" height="1.5" rx="1" fill="#29ABE2" opacity="0.6"/>
 </svg>
