@@ -3,384 +3,329 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Brenda Sharkey | SHARKEYLICIOUS</title>
-    <meta name="description" content="Brenda Sharkey - Owner, SHARKEYLICIOUS. ">
+    <title>Brenda Sharkey | Sharkeylicious</title>
+    <meta name="description" content="Brenda Sharkey — Owner, Sharkeylicious. Handcrafted, no-sugar chocolate for every sweet tooth.">
 
     <!-- PWA / Home Screen support -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="My Card">
+    <meta name="apple-mobile-web-app-title" content="Sharkeylicious">
     <link rel="manifest" href="manifest.json">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="theme-color" content="#1A1A1A">
-    <link rel="apple-touch-icon" href="logo.svg">
-    <link rel="icon" href="logo.svg">
+    <meta name="theme-color" content="#160E08">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="icon" href="logo.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --accent: #29ABE2;
-            --accent-rgb: 41, 171, 226;
-            --bg: #1A1A1A;
-            --text-primary: #FFFFFF;
-            --text-secondary: #C7CCD4;
-            --text-muted: #808285;
+            /* Sharkeylicious palette — extracted from logo */
+            --gold:        #DCA028;   /* Tier 1 — primary  */
+            --gold-bright: #F2C84A;
+            --gold-deep:   #B0710A;
+            --blue:        #4B7DAF;   /* Tier 2 — secondary */
+            --blue-soft:   #7FA9CE;
+            --cream:       #F7F2EA;   /* Tier 3 — white/cream (text) */
+            --choc:        #602C0F;   /* Accent — chocolate */
+            --choc-deep:   #2E1607;
+
+            --bg:           #140D07;
+            --surface:      #241710;
+            --surface-2:    #2E1D12;
+            --text:         var(--cream);
+            --text-muted:   #C7B49E;
+            --border:       rgba(220, 160, 40, 0.22);
+            --gold-rgb:     220, 160, 40;
+            --blue-rgb:     75, 125, 175;
         }
 
+        html { -webkit-text-size-adjust: 100%; }
+
         body {
-            font-family: 'Montserrat', Arial, sans-serif;
-            background-color: var(--bg);
-            color: var(--text-primary);
+            font-family: 'Outfit', system-ui, sans-serif;
+            color: var(--text);
             min-height: 100vh;
+            min-height: 100dvh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 28px 20px;
             position: relative;
             overflow-x: hidden;
+            background:
+                radial-gradient(120% 80% at 50% -10%, #321F12 0%, #1C120A 45%, #120B05 100%);
         }
 
-        /* Subtle grid background — adjust opacity/size per brand */
-        body::before {
-            content: '';
+        /* warm grain + faint gold haze, fixed behind content (iOS-safe) */
+        .bg-fx {
             position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image:
-                linear-gradient(rgba(var(--accent-rgb), 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(var(--accent-rgb), 0.03) 1px, transparent 1px);
-            background-size: 40px 40px;
-            pointer-events: none;
+            inset: 0;
             z-index: 0;
+            pointer-events: none;
+            background-image:
+                radial-gradient(60% 40% at 50% 8%, rgba(var(--gold-rgb), 0.10), transparent 70%),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
         }
 
         .card {
             position: relative;
             z-index: 1;
-            max-width: 420px;
+            max-width: 392px;
             width: 100%;
-            background: linear-gradient(180deg, #222222 0%, var(--bg) 100%);
-            border: 1px solid rgba(var(--accent-rgb), 0.15);
-            border-radius: 16px;
-            padding: 40px 32px;
+            background: linear-gradient(168deg, #2A1B11 0%, #1B120B 100%);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 46px 30px 30px;
             text-align: center;
             box-shadow:
-                0 0 40px rgba(var(--accent-rgb), 0.06),
-                0 20px 60px rgba(0, 0, 0, 0.4);
+                0 0 0 1px rgba(255, 255, 255, 0.02) inset,
+                0 32px 70px rgba(0, 0, 0, 0.55),
+                0 0 70px rgba(var(--gold-rgb), 0.07);
+            opacity: 0;
+            transform: translateY(18px) scale(0.99);
+            animation: cardIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.05s forwards;
         }
 
-        /* Top accent line */
+        /* gold foil top bar */
         .card::before {
             content: '';
             position: absolute;
             top: 0; left: 50%;
             transform: translateX(-50%);
-            width: 60%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            border-radius: 2px;
+            width: 56%;
+            height: 3px;
+            border-radius: 0 0 4px 4px;
+            background: linear-gradient(90deg, transparent, var(--gold-deep), var(--gold-bright), var(--gold-deep), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 5.5s linear infinite;
         }
+
+        .stagger > * { opacity: 0; animation: rise 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .stagger > *:nth-child(1) { animation-delay: 0.16s; }
+        .stagger > *:nth-child(2) { animation-delay: 0.23s; }
+        .stagger > *:nth-child(3) { animation-delay: 0.30s; }
+        .stagger > *:nth-child(4) { animation-delay: 0.37s; }
+        .stagger > *:nth-child(5) { animation-delay: 0.44s; }
+        .stagger > *:nth-child(6) { animation-delay: 0.51s; }
+        .stagger > *:nth-child(7) { animation-delay: 0.58s; }
+        .stagger > *:nth-child(8) { animation-delay: 0.65s; }
+        .stagger > *:nth-child(9) { animation-delay: 0.72s; }
 
         .logo {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 24px;
-            border-radius: 12px;
-            overflow: hidden;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px;
+            position: relative;
         }
-
-        .logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
+        .logo::after {
+            content: '';
+            position: absolute;
+            inset: 6%;
+            border-radius: 50%;
+            box-shadow: 0 0 34px 4px rgba(var(--gold-rgb), 0.28);
+            z-index: -1;
         }
+        .logo img { width: 100%; height: 100%; object-fit: contain; display: block; }
 
         .name {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            font-size: 22px;
-            color: var(--text-primary);
-            letter-spacing: 1px;
-            margin-bottom: 6px;
+            font-family: 'Fraunces', Georgia, serif;
+            font-weight: 600;
+            font-size: 27px;
+            line-height: 1.15;
+            color: var(--cream);
+            letter-spacing: 0.2px;
+            margin-bottom: 7px;
         }
-
-        .title {
-            font-weight: 400;
-            font-size: 14px;
-            color: var(--text-secondary);
-            margin-bottom: 4px;
-        }
-
+        .title { font-size: 14px; font-weight: 400; color: var(--text-muted); margin-bottom: 5px; }
         .company {
-            font-weight: 500;
-            font-size: 15px;
-            color: var(--accent);
-            margin-bottom: 20px;
+            font-size: 12px; font-weight: 600;
+            color: var(--gold);
+            letter-spacing: 3px; text-transform: uppercase;
+            margin-bottom: 18px;
         }
 
         .divider {
-            width: 60px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            margin: 0 auto 20px;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            margin: 0 auto 18px; width: 70%;
         }
+        .divider .ln { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(var(--gold-rgb), 0.55)); }
+        .divider .ln:last-child { background: linear-gradient(90deg, rgba(var(--gold-rgb), 0.55), transparent); }
+        .divider .dot { width: 6px; height: 6px; transform: rotate(45deg); background: var(--gold); box-shadow: 0 0 8px rgba(var(--gold-rgb), 0.6); }
 
         .tagline {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 500;
-            font-size: 11px;
-            color: var(--accent);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 16px;
+            font-family: 'Fraunces', Georgia, serif;
+            font-style: italic; font-weight: 500;
+            font-size: 16px; line-height: 1.45;
+            color: var(--gold-bright);
+            margin-bottom: 14px;
         }
-
         .bio {
-            font-size: 14px;
-            line-height: 1.6;
-            color: var(--text-secondary);
-            font-weight: 300;
-            margin-bottom: 28px;
-            padding: 0 8px;
+            font-size: 13.5px; line-height: 1.7; font-weight: 300;
+            color: var(--text-muted);
+            margin-bottom: 26px; padding: 0 4px;
         }
 
-        .contact-links {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 28px;
-        }
-
+        .contact-links { display: flex; flex-direction: column; gap: 11px; margin-bottom: 24px; }
         .contact-link {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 10px 16px;
-            background: rgba(var(--accent-rgb), 0.06);
-            border: 1px solid rgba(var(--accent-rgb), 0.1);
-            border-radius: 8px;
-            color: var(--text-primary);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 400;
-            transition: all 0.2s ease;
+            display: flex; align-items: center; gap: 13px;
+            padding: 12px 16px;
+            background: rgba(var(--gold-rgb), 0.05);
+            border: 1px solid rgba(var(--gold-rgb), 0.14);
+            border-radius: 12px;
+            color: var(--text); text-decoration: none;
+            font-size: 14px; font-weight: 400;
+            transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
         }
+        .contact-link:hover { background: rgba(var(--gold-rgb), 0.11); border-color: rgba(var(--gold-rgb), 0.32); transform: translateY(-1px); }
+        .contact-link svg { width: 18px; height: 18px; flex-shrink: 0; fill: var(--gold); }
+        .contact-link span { color: var(--text-muted); }
 
-        .contact-link:hover {
-            background: rgba(var(--accent-rgb), 0.12);
-            border-color: rgba(var(--accent-rgb), 0.25);
-        }
-
-        .contact-link svg {
-            width: 18px;
-            height: 18px;
-            flex-shrink: 0;
-            fill: var(--accent);
-        }
-
-        .contact-link span {
-            color: var(--text-secondary);
-        }
-
-        .btn-row {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 24px;
-        }
-
+        .btn-row { display: flex; gap: 10px; margin-bottom: 22px; }
         .save-btn, .qr-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 14px 24px;
-            border: none;
-            border-radius: 8px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            letter-spacing: 0.5px;
-            justify-content: center;
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            padding: 14px 22px; border: none; border-radius: 10px;
+            font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 600;
+            letter-spacing: 0.3px; cursor: pointer;
+            transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease, background 0.18s ease;
         }
-
         .save-btn {
             flex: 1;
-            background: var(--accent);
-            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--gold-bright), var(--gold) 55%, var(--gold-deep));
+            color: var(--choc-deep);
+            box-shadow: 0 6px 18px rgba(var(--gold-rgb), 0.22);
         }
-
-        .save-btn:hover {
-            filter: brightness(0.85);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 20px rgba(var(--accent-rgb), 0.3);
-        }
+        .save-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 26px rgba(var(--gold-rgb), 0.36); filter: brightness(1.04); }
+        .save-btn svg { width: 18px; height: 18px; fill: var(--choc-deep); }
 
         .qr-btn {
-            background: rgba(var(--accent-rgb), 0.1);
-            color: var(--accent);
-            border: 1px solid rgba(var(--accent-rgb), 0.2);
+            background: rgba(var(--blue-rgb), 0.12);
+            color: var(--blue-soft);
+            border: 1px solid rgba(var(--blue-rgb), 0.40);
             padding: 14px 18px;
         }
-
-        .qr-btn:hover {
-            background: rgba(var(--accent-rgb), 0.18);
-            transform: translateY(-1px);
-        }
-
+        .qr-btn:hover { background: rgba(var(--blue-rgb), 0.20); transform: translateY(-1px); }
+        .qr-btn svg { width: 18px; height: 18px; fill: var(--blue-soft); }
         .save-btn:active, .qr-btn:active { transform: translateY(0); }
-        .save-btn svg { width: 18px; height: 18px; fill: var(--text-primary); }
-        .qr-btn svg { width: 18px; height: 18px; fill: var(--accent); }
 
-        /* QR Code overlay */
         .qr-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.85);
-            z-index: 100;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+            display: none; position: fixed; inset: 0;
+            background: rgba(10, 6, 3, 0.88); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+            z-index: 100; align-items: center; justify-content: center; padding: 20px;
         }
-
-        .qr-overlay.active { display: flex; }
-
+        .qr-overlay.active { display: flex; animation: fadeIn 0.2s ease; }
         .qr-modal {
-            background: var(--bg);
-            border: 1px solid rgba(var(--accent-rgb), 0.2);
-            border-radius: 16px;
-            padding: 32px;
-            text-align: center;
-            max-width: 320px;
-            width: 100%;
+            background: linear-gradient(168deg, #2A1B11, #1B120B);
+            border: 1px solid var(--border); border-radius: 18px;
+            padding: 30px; text-align: center; max-width: 320px; width: 100%;
+            box-shadow: 0 24px 60px rgba(0,0,0,0.6);
         }
-
-        .qr-modal h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 14px;
-            color: var(--accent);
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-        }
-
-        .qr-modal p { font-size: 12px; color: var(--text-muted); margin-bottom: 20px; }
-        .qr-modal svg { width: 200px; height: 200px; margin: 0 auto 20px; display: block; }
-
+        .qr-modal h3 { font-family: 'Fraunces', serif; font-size: 17px; font-weight: 600; color: var(--gold); margin-bottom: 6px; }
+        .qr-modal p { font-size: 12px; color: var(--text-muted); margin-bottom: 18px; }
+        .qr-wrap { background: #fff; border-radius: 12px; padding: 12px; width: 212px; margin: 0 auto 18px; }
+        .qr-wrap img { width: 188px; height: 188px; display: block; }
         .qr-close {
-            background: none;
-            border: 1px solid rgba(var(--accent-rgb), 0.2);
-            color: var(--text-secondary);
-            padding: 10px 24px;
-            border-radius: 8px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 13px;
-            cursor: pointer;
-            transition: all 0.2s ease;
+            background: none; border: 1px solid var(--border); color: var(--text-muted);
+            padding: 10px 24px; border-radius: 9px; font-family: 'Outfit', sans-serif;
+            font-size: 13px; cursor: pointer; transition: all 0.18s ease;
         }
+        .qr-close:hover { border-color: var(--gold); color: var(--cream); }
 
-        .qr-close:hover { border-color: var(--accent); color: var(--text-primary); }
+        .footer { font-size: 11px; color: #8d7a64; letter-spacing: 0.3px; }
+        .footer a { color: var(--gold); text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
 
-        .footer { font-size: 11px; color: var(--text-muted); }
+        @keyframes cardIn { to { opacity: 1; transform: none; } }
+        @keyframes rise { from { opacity: 0; transform: translateY(13px); } to { opacity: 1; transform: none; } }
+        @keyframes shimmer { 0% { background-position: 150% 0; } 100% { background-position: -50% 0; } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        @media (max-width: 480px) {
-            .card { padding: 32px 24px; }
-            .name { font-size: 20px; }
-            .tagline { font-size: 10px; }
+        @media (prefers-reduced-motion: reduce) {
+            .card, .stagger > *, .card::before { animation: none !important; opacity: 1 !important; transform: none !important; }
+        }
+        @media (max-width: 420px) {
+            .card { padding: 40px 22px 26px; }
+            .name { font-size: 24px; }
+            .logo { width: 132px; height: 132px; }
             .btn-row { flex-direction: column; }
         }
     </style>
 </head>
 <body>
+    <div class="bg-fx"></div>
+
     <div class="card">
-        <div class="logo">
-            <img src="logo.svg" alt="SHARKEYLICIOUS">
+        <div class="stagger">
+            <div class="logo">
+                <picture>
+                    <source srcset="logo.webp" type="image/webp">
+                    <img src="logo.png" alt="Sharkeylicious logo" width="150" height="150">
+                </picture>
+            </div>
+
+            <div class="name">Brenda Sharkey</div>
+            <div class="title">Owner</div>
+            <div class="company">Sharkeylicious</div>
+
+            <div class="divider"><span class="ln"></span><span class="dot"></span><span class="ln"></span></div>
+
+            <div class="tagline">Made with love. Sweetened by nature.</div>
+
+            <div class="bio">Handcrafted chocolate for every sweet tooth — sweetened only with Stevia, Monkfruit, Allulose &amp; Erythritol. No sugar. No aspartame. No shortcuts.</div>
+
+            <div class="contact-links">
+                <a href="tel:+18169188812" class="contact-link" aria-label="Call Brenda">
+                    <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                    <span>(816) 918-8812</span>
+                </a>
+                <a href="mailto:sharkeylicious@gmail.com" class="contact-link" aria-label="Email Sharkeylicious">
+                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    <span>sharkeylicious@gmail.com</span>
+                </a>
+            </div>
+
+            <div class="btn-row">
+                <button class="save-btn" onclick="saveContact()">
+                    <svg viewBox="0 0 24 24"><path d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2v9.67z"/></svg>
+                    Save Contact
+                </button>
+                <button class="qr-btn" onclick="toggleQR()">
+                    <svg viewBox="0 0 24 24"><path d="M3 11h8V3H3v8zm2-6h4v4H5V5zm8-2v8h8V3h-8zm6 6h-4V5h4v4zM3 21h8v-8H3v8zm2-6h4v4H5v-4zm13-2h-2v3h-3v2h3v3h2v-3h3v-2h-3v-3zm-3 8v-2h-2v2h2zm4 0v-2h-2v2h2z"/></svg>
+                    QR
+                </button>
+            </div>
+
+            <div class="footer">Powered by <a href="https://www.sharkitectdigital.com" target="_blank" rel="noopener">Sharkitect</a></div>
         </div>
-
-        <div class="name">Brenda Sharkey</div>
-        <div class="title">Owner</div>
-        <div class="company">SHARKEYLICIOUS</div>
-
-        <div class="divider"></div>
-
-        <div class="tagline">Made with love. Sweetened by nature.</div>
-
-        <div class="bio"></div>
-
-        <div class="contact-links">
-            <a href="tel:+18169188812" class="contact-link">
-                <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-                <span>(816) 918-8812</span>
-            </a>
-            
-
-            <a href="mailto:sharkeylicious@gmail.com" class="contact-link">
-                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                <span>sharkeylicious@gmail.com</span>
-            </a>
-
-            
-            
-            
-        </div>
-
-        <div class="btn-row">
-            <button class="save-btn" onclick="saveContact()">
-                <svg viewBox="0 0 24 24"><path d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2v9.67z"/></svg>
-                Save Contact
-            </button>
-            <button class="qr-btn" onclick="toggleQR()">
-                <svg viewBox="0 0 24 24"><path d="M3 11h8V3H3v8zm2-6h4v4H5V5zm8-2v8h8V3h-8zm6 6h-4V5h4v4zM3 21h8v-8H3v8zm2-6h4v4H5v-4zm13-2h-2v3h-3v2h3v3h2v-3h3v-2h-3v-3zm-3 8v-2h-2v2h2zm4 0v-2h-2v2h2z"/></svg>
-                QR
-            </button>
-        </div>
-
-        <div class="footer">Powered by <a href="https://www.sharkitectdigital.com" target="_blank" rel="noopener" style="color:#29ABE2;text-decoration:none;">Sharkitect</a></div>
     </div>
 
-    <!-- QR Code Overlay -->
     <div class="qr-overlay" id="qrOverlay" onclick="toggleQR()">
         <div class="qr-modal" onclick="event.stopPropagation()">
-            <h3>SCAN TO CONNECT</h3>
+            <h3>Scan to connect</h3>
             <p>Point your camera at the code</p>
-            <img src="qr-code.svg" alt="QR code" style="width:220px;height:220px;display:block;margin:0 auto 20px;border-radius:8px;"/>
+            <div class="qr-wrap"><img src="qr-code.svg" alt="QR code linking to this card"></div>
             <button class="qr-close" onclick="toggleQR()">Close</button>
         </div>
     </div>
 
     <script>
         function saveContact() {
-            const _officePhone = ``;
-            const _photoB64 = ``;  // optional headshot JPEG, base64 only (no data: prefix). Empty string omits vCard PHOTO.
-            const _officeAddr = ``;
-            const _website = ``;
             const _tagline = `Made with love. Sweetened by nature.`;
-            const _bio = ``;
-            const _ap = _officeAddr ? _officeAddr.split(',').map(s => s.trim()) : [];
-            const _adrLine = _officeAddr
-                ? `ADR;TYPE=WORK:;;${_ap[0] || ''};${_ap[1] || ''};${_ap[2] || ''};${_ap[3] || ''};USA`
-                : '';
-            const _noteStr = [_tagline, _bio].filter(Boolean).join(' | ');
-
             const vcard = [
                 `BEGIN:VCARD`,
                 `VERSION:3.0`,
                 `N:Sharkey;Brenda;;;`,
                 `FN:Brenda Sharkey`,
-                `ORG:SHARKEYLICIOUS`,
+                `ORG:Sharkeylicious`,
                 `TITLE:Owner`,
                 `TEL;TYPE=CELL:(816) 918-8812`,
-                _officePhone ? `TEL;TYPE=WORK:${_officePhone}` : '',
                 `EMAIL;TYPE=WORK:sharkeylicious@gmail.com`,
-                _website ? `URL:${_website}` : '',
-                _adrLine,
-                _noteStr ? `NOTE:${_noteStr}` : '',
-                _photoB64 ? `PHOTO;ENCODING=b;TYPE=JPEG:${_photoB64}` : '',
+                `NOTE:${_tagline}`,
                 `END:VCARD`
-            ].filter(Boolean).join('\r\n');
+            ].join('\r\n');
 
             const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8' });
             const url = URL.createObjectURL(blob);
@@ -392,12 +337,9 @@
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
         }
-
         function toggleQR() {
             document.getElementById('qrOverlay').classList.toggle('active');
         }
-
-        function generateQR() { /* replaced by direct img tag */ }
-        </script>
+    </script>
 </body>
 </html>
