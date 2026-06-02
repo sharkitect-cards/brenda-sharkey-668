@@ -1,7 +1,7 @@
 {
-  "name": "{{PERSON_FULL_NAME}} | {{COMPANY_NAME}}",
+  "name": "Brenda Sharkey | SHARKEYLICIOUS",
   "short_name": "My Card",
-  "description": "Digital business card for {{PERSON_FULL_NAME}}",
+  "description": "Digital business card for Brenda Sharkey",
   "start_url": ".",
   "scope": ".",
   "display": "standalone",
