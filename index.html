@@ -225,7 +225,8 @@
         }
         .qr-modal h3 { font-family: 'Fraunces', serif; font-size: 17px; font-weight: 600; color: var(--gold); margin-bottom: 6px; }
         .qr-modal p { font-size: 12px; color: var(--text-muted); margin-bottom: 18px; }
-        .qr-wrap { background: #fff; border-radius: 12px; padding: 12px; width: 212px; margin: 0 auto 18px; }
+        .qr-wrap { display: block; background: #fff; border-radius: 12px; padding: 12px; width: 212px; margin: 0 auto 18px; transition: transform 0.18s ease; }
+        .qr-wrap:hover { transform: scale(1.02); }
         .qr-wrap img { width: 188px; height: 188px; display: block; }
         .qr-close {
             background: none; border: 1px solid var(--border); color: var(--text-muted);
@@ -288,13 +289,9 @@
             </div>
 
             <div class="btn-row">
-                <button class="save-btn" onclick="saveContact()">
-                    <svg viewBox="0 0 24 24"><path d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2v9.67z"/></svg>
-                    Save Contact
-                </button>
-                <button class="qr-btn" onclick="toggleQR()">
+                <button class="save-btn" onclick="toggleQR()">
                     <svg viewBox="0 0 24 24"><path d="M3 11h8V3H3v8zm2-6h4v4H5V5zm8-2v8h8V3h-8zm6 6h-4V5h4v4zM3 21h8v-8H3v8zm2-6h4v4H5v-4zm13-2h-2v3h-3v2h3v3h2v-3h3v-2h-3v-3zm-3 8v-2h-2v2h2zm4 0v-2h-2v2h2z"/></svg>
-                    QR
+                    Save My Contact
                 </button>
             </div>
 
@@ -304,39 +301,14 @@
 
     <div class="qr-overlay" id="qrOverlay" onclick="toggleQR()">
         <div class="qr-modal" onclick="event.stopPropagation()">
-            <h3>Scan to connect</h3>
-            <p>Point your camera at the code</p>
-            <div class="qr-wrap"><img src="qr-code.svg" alt="QR code linking to this card"></div>
+            <h3>Save my contact</h3>
+            <p>Scan the code — or tap it to add me</p>
+            <a class="qr-wrap" href="vcard.vcf" aria-label="Open Brenda Sharkey's contact card"><img src="qr-code.svg" alt="Scan to save Brenda Sharkey's contact"></a>
             <button class="qr-close" onclick="toggleQR()">Close</button>
         </div>
     </div>
 
     <script>
-        function saveContact() {
-            const _tagline = `Made with love. Sweetened by nature.`;
-            const vcard = [
-                `BEGIN:VCARD`,
-                `VERSION:3.0`,
-                `N:Sharkey;Brenda;;;`,
-                `FN:Brenda Sharkey`,
-                `ORG:Sharkeylicious`,
-                `TITLE:Owner`,
-                `TEL;TYPE=CELL:(816) 918-8812`,
-                `EMAIL;TYPE=WORK:sharkeylicious@gmail.com`,
-                `NOTE:${_tagline}`,
-                `END:VCARD`
-            ].join('\r\n');
-
-            const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'Brenda-Sharkey.vcf';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        }
         function toggleQR() {
             document.getElementById('qrOverlay').classList.toggle('active');
         }
